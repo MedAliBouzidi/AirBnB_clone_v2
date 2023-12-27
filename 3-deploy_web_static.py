@@ -16,7 +16,7 @@ def do_pack():
               format(time.strftime("%Y%m%d%H%M%S")))
         return ("versions/web_static_{}.tgz".format(time.
                                                     strftime("%Y%m%d%H%M%S")))
-    except:
+    except Except:
         return None
 
 
@@ -38,7 +38,7 @@ def do_deploy(archive_path):
         run("ln -s {} /data/web_static/current".format(folder))
         print("Deployment done")
         return True
-    except:
+    except Except:
         return False
 
 
@@ -47,5 +47,5 @@ def deploy():
     try:
         path = do_pack()
         return do_deploy(path)
-    except:
+    except Except:
         return False

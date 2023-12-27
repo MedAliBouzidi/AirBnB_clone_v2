@@ -12,5 +12,5 @@ def do_pack():
               format(time.strftime("%Y%m%d%H%M%S")))
         return ("versions/web_static_{}.tgz".format(time.
                                                     strftime("%Y%m%d%H%M%S")))
-    except:
+    except Except:
         return None
