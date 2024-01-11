@@ -8,6 +8,7 @@ from fabric.operations import env, put, run
 
 env.hosts = ["100.24.236.248", "100.26.151.181"]
 
+
 def do_pack():
     """Generate an tgz archive from web_static folder"""
     try:
@@ -18,6 +19,7 @@ def do_pack():
         return ("versions/web_static_{}.tgz".format(time_str))
     except Except:
         return None
+
 
 def do_deploy(archive_path):
     """Distribute an archive to web servers"""
