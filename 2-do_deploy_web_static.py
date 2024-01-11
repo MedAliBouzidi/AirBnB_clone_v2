@@ -3,6 +3,7 @@
 Fabric script that distributes an archive to your web servers
 """
 
+import time
 from fabric.api import *
 import os
 
