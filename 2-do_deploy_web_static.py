@@ -12,18 +12,14 @@ env.user = "ubuntu"
 
 
 def do_pack():
-    """
-        return the archive path if archive has generated correctly.
-    """
-
-    local("mkdir -p versions")
-    date = datetime.now().strftime("%Y%m%d%H%M%S")
-    archived_f_path = "versions/web_static_{}.tgz".format(date)
-    t_gzip_archive = local("tar -cvzf {} web_static".format(archived_f_path))
-
-    if t_gzip_archive.succeeded:
-        return archived_f_path
-    else:
+    """Generate an tgz archive from web_static folder"""
+    try:
+        time_str = time.strftime("%Y%m%d%H%M%S")
+        local("mkdir -p versions")
+        local("tar -cvzf versions/web_static_{}.tgz web_static/"
+              .format(time_str))
+        return ("versions/web_static_{}.tgz".format(time_str))
+    except Except:
         return None
 
 
