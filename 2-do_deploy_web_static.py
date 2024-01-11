@@ -8,9 +8,9 @@ from fabric.api import *
 import os
 
 env.hosts = ["100.24.236.248", "100.26.151.181"]
-env.user = "ubuntu"
 
 
+@runs_once
 def do_pack():
     """Generate an tgz archive from web_static folder"""
     try:
@@ -23,6 +23,7 @@ def do_pack():
         return None
 
 
+@task
 def do_deploy(archive_path):
     """
         Distribute archive.
