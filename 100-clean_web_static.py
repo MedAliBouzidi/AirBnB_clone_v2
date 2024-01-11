@@ -3,8 +3,7 @@
 from fabric.api import *
 
 
-env.hosts = ['44.210.150.159', '35.173.47.15']
-env.user = "ubuntu"
+env.hosts = ["100.24.236.248", "100.26.151.181"]
 
 
 def do_clean(number=0):
@@ -12,10 +11,10 @@ def do_clean(number=0):
 
     number = int(number)
 
-    if number == 0:
-        number = 2
-    else:
-        number += 1
+    #if number == 0:
+     #   number = 2
+    #else:
+    #    number += 1
 
     local('cd versions ; ls -t | tail -n +{} | xargs rm -rf'.format(number))
     path = '/data/web_static/releases'
