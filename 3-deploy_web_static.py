@@ -2,13 +2,14 @@
 """Create and distributes an archive to web servers"""
 import os.path
 import time
-from fabric.api import local
+from fabric.api import local, runs_once, task
 from fabric.operations import env, put, run
 
 
 env.hosts = ["100.24.236.248", "100.26.151.181"]
 
 
+@runs_once
 def do_pack():
     """Generate an tgz archive from web_static folder"""
     try:
@@ -21,6 +22,7 @@ def do_pack():
         return None
 
 
+@task
 def do_deploy(archive_path):
     """Distribute an archive to web servers"""
     if (os.path.isfile(archive_path) is False):
@@ -43,6 +45,7 @@ def do_deploy(archive_path):
         return False
 
 
+@task
 def deploy():
     """Create and distributes an archive to web servers"""
     try:
