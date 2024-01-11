@@ -51,18 +51,21 @@ def deploy():
     except Except:
         return False
 
+@runs_once
+def remove_local(number):
+    """ method doc
+        sudo fab -f 1-pack_web_static.py do_pack
+    """
+    local("ls -dt versions/* | tail -n +{} | sudo xargs rm -fr".format(number))
+
 
 @task
 def do_clean(number=0):
     """ CLEANS """
 
-    number = int(number)
-
-    if number == 0:
-        number = 2
-    else:
-        number += 1
-
-    local('cd versions ; ls -t | tail -n +{} | xargs rm -rf'.format(number))
+    if int(number) == 0:
+        number = 1
+    number = int(number) + 1
+    remove_local(number)
     path = '/data/web_static/releases'
     run('cd {} ; ls -t | tail -n +{} | xargs rm -rf'.format(path, number))
