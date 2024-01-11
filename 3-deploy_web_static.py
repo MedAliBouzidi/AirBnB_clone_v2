@@ -5,20 +5,19 @@ import time
 from fabric.api import local
 from fabric.operations import env, put, run
 
-env.hosts = ['44.210.150.159', '35.173.47.15']
 
+env.hosts = ["100.24.236.248", "100.26.151.181"]
 
 def do_pack():
     """Generate an tgz archive from web_static folder"""
     try:
+        time_str = time.strftime("%Y%m%d%H%M%S")
         local("mkdir -p versions")
-        local("tar -cvzf versions/web_static_{}.tgz web_static/".
-              format(time.strftime("%Y%m%d%H%M%S")))
-        return ("versions/web_static_{}.tgz".format(time.
-                                                    strftime("%Y%m%d%H%M%S")))
+        local("tar -cvzf versions/web_static_{}.tgz web_static/"
+              .format(time_str))
+        return ("versions/web_static_{}.tgz".format(time_str))
     except Except:
         return None
-
 
 def do_deploy(archive_path):
     """Distribute an archive to web servers"""
