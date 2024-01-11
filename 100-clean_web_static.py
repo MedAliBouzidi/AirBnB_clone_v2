@@ -11,8 +11,8 @@ def do_pack():
     """Generate an tgz archive from web_static folder"""
     try:
         time_str = time.strftime("%Y%m%d%H%M%S")
-        local("mkdir -p versions")
-        local("tar -cvzf versions/web_static_{}.tgz web_static/"
+        local("sudo mkdir -p versions")
+        local("sudo tar -cvzf versions/web_static_{}.tgz web_static/"
               .format(time_str))
         return ("versions/web_static_{}.tgz".format(time_str))
     except Except:
@@ -29,13 +29,13 @@ def do_deploy(archive_path):
         file = archive_path.split("/")[-1]
         folder = ("/data/web_static/releases/" + file.split(".")[0])
         put(archive_path, "/tmp/")
-        run("mkdir -p {}".format(folder))
-        run("tar -xzf /tmp/{} -C {}".format(file, folder))
-        run("rm /tmp/{}".format(file))
-        run("mv {}/web_static/* {}/".format(folder, folder))
-        run("rm -rf {}/web_static".format(folder))
-        run('rm -rf /data/web_static/current')
-        run("ln -s {} /data/web_static/current".format(folder))
+        run("sudo mkdir -p {}".format(folder))
+        run("sudo tar -xzf /tmp/{} -C {}".format(file, folder))
+        run("sudo rm /tmp/{}".format(file))
+        run("sudo mv {}/web_static/* {}/".format(folder, folder))
+        run("sudo rm -rf {}/web_static".format(folder))
+        run('sudo rm -rf /data/web_static/current')
+        run("sudo ln -s {} /data/web_static/current".format(folder))
         print("Deployment done")
         return True
     except Except:
@@ -69,4 +69,4 @@ def do_clean(number=0):
     number = int(number) + 1
     remove_local(number)
     path = '/data/web_static/releases'
-    run('cd {} ; ls -t | tail -n +{} | xargs rm -rf'.format(path, number))
+    run('cd {} ; ls -t | tail -n +{} | sudo xargs rm -rf'.format(path, number))
