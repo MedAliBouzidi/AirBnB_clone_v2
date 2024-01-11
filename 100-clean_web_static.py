@@ -51,6 +51,7 @@ def deploy():
     except Except:
         return False
 
+
 @runs_once
 def remove_local(number):
     """ method doc
