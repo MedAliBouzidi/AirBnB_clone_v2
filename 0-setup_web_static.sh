@@ -19,10 +19,9 @@ sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 sudo chown -R ubuntu:ubuntu /data
 
-config_str="\tlocation /hbnb_static {\n\talias /data/web_static/current;\n\t}"
-if ! grep -q "$config_str" /etc/nginx/sites-enabled/default;
+if ! grep -q "location /hbnb_static" /etc/nginx/sites-enabled/default;
 then
-  sudo sed -i "\$i\\$config_str" /etc/nginx/sites-enabled/default
+  sudo sed -i '$i\\tlocation /hbnb_static {\n\talias /data/web_static/current;\n\t}' /etc/nginx/sites-enabled/default
 fi
 
 sudo service nginx restart
