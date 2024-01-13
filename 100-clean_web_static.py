@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """ Function that deploys """
-from fabric.api import *
+from fabric.api import put, run, runs_once, local, task, env
+import os
+import time
 
 
 env.hosts = ["100.24.236.248", "100.26.151.181"]
@@ -15,7 +17,7 @@ def do_pack():
         local("sudo tar -cvzf versions/web_static_{}.tgz web_static/"
               .format(time_str))
         return ("versions/web_static_{}.tgz".format(time_str))
-    except Except:
+    except Exception:
         return None
 
 
@@ -38,7 +40,7 @@ def do_deploy(archive_path):
         run("sudo ln -s {} /data/web_static/current".format(folder))
         print("Deployment done")
         return True
-    except Except:
+    except Exception:
         return False
 
 
@@ -48,7 +50,7 @@ def deploy():
     try:
         path = do_pack()
         return do_deploy(path)
-    except Except:
+    except Exception:
         return False
 
 
