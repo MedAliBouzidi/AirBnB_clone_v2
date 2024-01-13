@@ -24,4 +24,6 @@ then
   sudo sed -i '$i\\tlocation /hbnb_static {\n\talias /data/web_static/current;\n\t}' /etc/nginx/sites-enabled/default
 fi
 
+sudo ln -sf /etc/nginx/sites-enabled /etc/nginx/sites-available
+
 sudo service nginx restart
