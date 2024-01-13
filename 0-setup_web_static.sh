@@ -13,7 +13,8 @@ printf %s "<!DOCTYPE html>
   <body>
     <p>Nginx server test</p>
   </body>
-</html>" | sudo tee /data/web_static/releases/test/index.html
+</html>
+" | sudo tee /data/web_static/releases/test/index.html
 
 sudo rm -rf /data/web_static/current
 
