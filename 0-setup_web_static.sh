@@ -15,6 +15,8 @@ printf %s "<!DOCTYPE html>
   </body>
 </html>" | sudo tee /data/web_static/releases/test/index.html
 
+sudo rm -rf /data/web_static/current
+
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
 
 sudo chown -R ubuntu:ubuntu /data
