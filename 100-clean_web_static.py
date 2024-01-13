@@ -70,5 +70,5 @@ def do_clean(number=0):
         number = 1
     number = int(number) + 1
     remove_local(number)
-    path = '/data/web_static/releases'
+    path = '/data/web_static/releases/*'
     run('cd {} ; ls -t | tail -n +{} | sudo xargs rm -rf'.format(path, number))
