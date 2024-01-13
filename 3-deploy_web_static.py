@@ -18,7 +18,7 @@ def do_pack():
         local("tar -cvzf versions/web_static_{}.tgz web_static/"
               .format(time_str))
         return ("versions/web_static_{}.tgz".format(time_str))
-    except Except:
+    except Exception:
         return None
 
 
@@ -41,7 +41,7 @@ def do_deploy(archive_path):
         run("ln -s {} /data/web_static/current".format(folder))
         print("Deployment done")
         return True
-    except Except:
+    except Exception:
         return False
 
 
@@ -51,5 +51,5 @@ def deploy():
     try:
         path = do_pack()
         return do_deploy(path)
-    except Except:
+    except Exception:
         return False
