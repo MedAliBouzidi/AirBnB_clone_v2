@@ -36,13 +36,15 @@ def do_deploy(archive_path):
         newest_version = "/data/web_static/releases/" + archived_file[:-4]
         archived_file = "/tmp/" + archived_file
         put(archive_path, "/tmp/")
-        run(f"sudo mkdir -p {newest_version}")
-        run(f"sudo tar -xzf {archived_file} -C {newest_version}/")
-        run(f"sudo rm {archived_file}")
-        run(f"sudo mv {newest_version}/web_static/* {newest_version}")
-        run(f"sudo rm -rf {newest_version}/web_static")
-        run(f"sudo rm -rf /data/web_static/current")
-        run(f"sudo ln -s {newest_version} /data/web_static/current")
+        run("sudo mkdir -p {}".format(newest_version))
+        run("sudo tar -xzf {} -C {}/".format(archived_file,
+                                             newest_version))
+        run("sudo rm {}".format(archived_file))
+        run("sudo mv {}/web_static/* {}".format(newest_version,
+                                                newest_version))
+        run("sudo rm -rf {}/web_static".format(newest_version))
+        run("sudo rm -rf /data/web_static/current")
+        run("sudo ln -s {} /data/web_static/current".format(newest_version))
 
         print("New version deployed!")
         return True
