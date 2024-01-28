@@ -28,7 +28,7 @@ def c_is_fun(text):
 @app.route('/python/<text>')
 def python(text="is cool"):
     """ return a text from path variable with default value """
-    return f'python {text}'
+    return f'python {text.replace("_', " ")}'
 
 
 if __name__ == "__main__":
